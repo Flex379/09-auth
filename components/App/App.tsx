@@ -8,7 +8,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import { useDebouncedCallback } from "use-debounce";
 import css from "./App.module.css";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 
 export default function App() {
   const [page, setPage] = useState(1);
