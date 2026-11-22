@@ -1,6 +1,7 @@
 import { getMe } from "@/lib/api/serverApi";
 import css from "./ProfilePage.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 import type { Metadata } from "next";
 
@@ -18,9 +19,7 @@ export default async function ProfilePage() {
         <div className={css.header}>
           <h1 className={css.formTitle}>Profile Page</h1>
 
-          <a href="/profile/edit" className={css.editProfileButton}>
-            Edit Profile
-          </a>
+          <Link href="/profile/edit">Edit profile</Link>
         </div>
 
         <div className={css.avatarWrapper}>

@@ -50,15 +50,14 @@ export async function fetchNoteById(id: string) {
   return data;
 }
 
-export async function checkSession() {
-  const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
-  const { data } = await globalApi.get<User | null>("/auth/session", {
-    headers: {
-      Cookie: cookieHeader,
-    },
+export async function checkSession(cookieHeader?: string) {
+  const cookiesHeader = cookieHeader ?? (await cookies()).toString();
+
+  const response = await globalApi.get<{ success: boolean }>("/auth/session", {
+    headers: { Cookie: cookiesHeader },
   });
-  return data;
+
+  return response;
 }
 
 export async function getMe() {
