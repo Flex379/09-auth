@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import { checkSession } from "@/lib/api/serverApi";
 import { parseSetCookie } from "cookie";
@@ -40,14 +41,6 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  for (const cookieString of refreshedCookies) {
-    const parsed = parseSetCookie(cookieString);
-
-    if (parsed.value) {
-      request.cookies.set(parsed.name, parsed.value);
-    }
-  }
-
   let response: NextResponse;
 
   if (isPrivateRoute && !isAuthenticated) {
@@ -55,9 +48,7 @@ export async function proxy(request: NextRequest) {
   } else if (isPublicRoute && isAuthenticated) {
     response = NextResponse.redirect(new URL("/", request.url));
   } else {
-    response = NextResponse.next({
-      request,
-    });
+    response = NextResponse.next();
   }
 
   for (const cookieString of refreshedCookies) {
